@@ -1,0 +1,25 @@
+# Python虚拟环境
+venv/
+myenv/
+env/
+.venv/
+ENV/
+
+# Python编译缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE设置
+.vscode/
+.idea/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 环境变量文件（切勿上传！）
+.env
+.env.local
+secrets.py
