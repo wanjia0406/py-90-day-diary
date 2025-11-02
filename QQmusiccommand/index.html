@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QQ音乐歌单数据分析</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .chart-container:hover {
+            transform: translateY(-3px);
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .chart-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .data-table {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .table-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 页面标题 -->
+        <div class="header">
+            <h1>🎵 QQ音乐歌单数据分析</h1>
+            <p>基于200首歌曲的数据可视化分析项目</p>
+        </div>
+
+        <!-- 数据统计卡片 -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">200</div>
+                <div class="stat-label">总歌曲数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">28</div>
+                <div class="stat-label">艺术家数量</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">音乐风格</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">7.2</div>
+                <div class="stat-label">平均评分</div>
+            </div>
+        </div>
+
+        <!-- 图表展示区域 -->
+        <div class="chart-grid">
+            <div class="chart-container">
+                <div class="chart-title">音乐风格分布</div>
+                <img src="charts/genre_distribution.png" alt="音乐风格分布图" class="chart-image">
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">发行年份分布</div>
+                <img src="charts/year_distribution.png" alt="发行年份分布图" class="chart-image">
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">艺术家歌曲数量 TOP15</div>
+                <img src="charts/artist_songs.png" alt="艺术家歌曲数量图" class="chart-image">
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">播放量趋势分析</div>
+                <img src="charts/play_count_trend.png" alt="播放量趋势图" class="chart-image">
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">评分与播放量关系</div>
+                <img src="charts/rating_vs_plays.png" alt="评分与播放量关系图" class="chart-image">
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">歌曲时长分布</div>
+                <img src="charts/duration_distribution.png" alt="歌曲时长分布图" class="chart-image">
+            </div>
+
+            <div class="chart-container full-width">
+                <div class="chart-title">各音乐风格特征热力图</div>
+                <img src="charts/genre_heatmap.png" alt="音乐特征热力图" class="chart-image">
+            </div>
+        </div>
+
+        <!-- 数据表格 -->
+        <div class="data-table">
+            <div class="table-title">📊 数据样本预览</div>
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>歌曲ID</th>
+                        <th>歌曲名称</th>
+                        <th>艺术家</th>
+                        <th>专辑</th>
+                        <th>风格</th>
+                        <th>发行年份</th>
+                        <th>播放量(百万)</th>
+                        <th>评分</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 数据将通过JavaScript动态加载 -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>© 2024 QQ音乐数据分析项目 | 基于Python、Pandas、Matplotlib开发</p>
+        </div>
+    </div>
+
+    <script>
+        // 加载CSV数据并显示在表格中
+        async function loadData() {
+            try {
+                const response = await fetch('qq_music_data.csv');
+                const csvText = await response.text();
+                
+                // 简单的CSV解析
+                const lines = csvText.split('\n');
+                const headers = lines[0].split(',');
+                
+                const tableBody = document.querySelector('#data-table tbody');
+                
+                // 显示前10行数据
+                for (let i = 1; i <= 10 && i < lines.length; i++) {
+                    if (lines[i].trim() === '') continue;
+                    
+                    const values = lines[i].split(',');
+                    const row = document.createElement('tr');
+                    
+                    // 显示关键列：ID, 歌曲名, 艺术家, 专辑, 风格, 年份, 播放量, 评分
+                    const columnsToShow = [0, 1, 2, 3, 4, 5, 13, 7]; // 对应CSV中的列索引
+                    
+                    columnsToShow.forEach(colIndex => {
+                        const cell = document.createElement('td');
+                        cell.textContent = values[colIndex] || '';
+                        row.appendChild(cell);
+                    });
+                    
+                    tableBody.appendChild(row);
+                }
+            } catch (error) {
+                console.error('加载数据失败:', error);
+                // 显示示例数据
+                showSampleData();
+            }
+        }
+
+        function showSampleData() {
+            const sampleData = [
+                [1, '绅士', '张学友', '经典重现', '爵士', 2017, 0.35, 9.4],
+                [2, '青花瓷', '林俊杰', '音乐之旅', '流行', 2018, 2.65, 4.2],
+                [3, '泡沫', '张学友', '心灵之声', '爵士', 2023, 0.43, 5.4],
+                [4, '天鹅湖', '周杰伦', '音乐盛典', '电子', 2016, 5.29, 7.0],
+                [5, '欢乐颂', '陈奕迅', '星空漫步', '说唱', 2020, 0.42, 6.7]
+            ];
+
+            const tableBody = document.querySelector('#data-table tbody');
+            
+            sampleData.forEach(rowData => {
+                const row = document.createElement('tr');
+                rowData.forEach(value => {
+                    const cell = document.createElement('td');
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+                tableBody.appendChild(row);
+            });
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            
+            // 添加平滑滚动效果
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

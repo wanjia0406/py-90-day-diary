@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QQ音乐歌单数据分析 - Flask版</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>🎵 QQ音乐数据分析</h1>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="active">首页</a>
+                <a href="/analysis">分析</a>
+                <a href="/about">关于</a>
+            </div>
+        </nav>
+
+        <!-- 页面标题 -->
+        <div class="header">
+            <h2>QQ音乐歌单数据可视化分析</h2>
+            <p>基于Flask的动态Web应用，支持数据筛选和交互</p>
+        </div>
+
+        <!-- 数据统计卡片 -->
+        <div class="stats-grid" id="stats-grid">
+            <!-- 统计数据将通过JavaScript动态加载 -->
+        </div>
+
+        <!-- 筛选面板 -->
+        <div class="filter-panel">
+            <h3>🔍 数据筛选</h3>
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label for="genre-filter">音乐风格:</label>
+                    <select id="genre-filter">
+                        <option value="">全部</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="artist-search">艺术家:</label>
+                    <input type="text" id="artist-search" placeholder="搜索艺术家...">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="min-rating">最低评分:</label>
+                    <input type="range" id="min-rating" min="1" max="10" value="1" step="0.1">
+                    <span id="min-rating-value">1.0</span>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="max-rating">最高评分:</label>
+                    <input type="range" id="max-rating" min="1" max="10" value="10" step="0.1">
+                    <span id="max-rating-value">10.0</span>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="year-from">年份从:</label>
+                    <input type="number" id="year-from" min="2010" max="2024" placeholder="2010">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="year-to">到:</label>
+                    <input type="number" id="year-to" min="2010" max="2024" placeholder="2024">
+                </div>
+                
+                <button id="filter-btn" class="btn-primary">应用筛选</button>
+                <button id="reset-btn" class="btn-secondary">重置</button>
+            </div>
+        </div>
+
+        <!-- 图表展示区域 -->
+        <div class="chart-grid">
+            <div class="chart-container">
+                <div class="chart-title">音乐风格分布</div>
+                <div id="genre-chart" class="chart-placeholder">
+                    <img src="{{ url_for('static', filename='charts/genre_distribution.png') }}" alt="音乐风格分布图" class="chart-image">
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">发行年份分布</div>
+                <div id="year-chart" class="chart-placeholder">
+                    <img src="{{ url_for('static', filename='charts/year_distribution.png') }}" alt="发行年份分布图" class="chart-image">
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">艺术家歌曲数量 TOP15</div>
+                <div id="artist-chart" class="chart-placeholder">
+                    <img src="{{ url_for('static', filename='charts/artist_songs.png') }}" alt="艺术家歌曲数量图" class="chart-image">
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">播放量趋势分析</div>
+                <div id="trend-chart" class="chart-placeholder">
+                    <img src="{{ url_for('static', filename='charts/play_count_trend.png') }}" alt="播放量趋势图" class="chart-image">
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据表格 -->
+        <div class="data-section">
+            <div class="section-header">
+                <h3>📊 筛选结果</h3>
+                <div class="result-info">
+                    <span id="result-count">加载中...</span>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>歌曲ID</th>
+                            <th>歌曲名称</th>
+                            <th>艺术家</th>
+                            <th>专辑</th>
+                            <th>风格</th>
+                            <th>年份</th>
+                            <th>播放量(百万)</th>
+                            <th>评分</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- 数据将通过JavaScript动态加载 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>© 2024 QQ音乐数据分析项目 | 基于Python Flask开发</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

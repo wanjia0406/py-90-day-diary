@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深度分析 - QQ音乐歌单数据分析</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .analysis-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .analysis-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .insight-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .insight-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .insight-content {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .metric {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 0 4px;
+        }
+        
+        .chart-full-width {
+            grid-column: 1 / -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>🎵 QQ音乐数据分析</h1>
+            </div>
+            <div class="nav-links">
+                <a href="/">首页</a>
+                <a href="/analysis" class="active">分析</a>
+                <a href="/about">关于</a>
+            </div>
+        </nav>
+
+        <!-- 页面标题 -->
+        <div class="header">
+            <h2>深度数据分析</h2>
+            <p>深入挖掘音乐数据背后的洞察和趋势</p>
+        </div>
+
+        <!-- 分析结果展示 -->
+        <div class="analysis-grid">
+            <div class="analysis-card">
+                <div class="analysis-title">📊 基础统计洞察</div>
+                <div class="insight-item">
+                    <div class="insight-title">歌曲分布特征</div>
+                    <div class="insight-content">
+                        数据集中包含<span class="metric">200</span>首歌曲，涵盖<span class="metric">8</span>种音乐风格，
+                        由<span class="metric">28</span>位艺术家演唱，时间跨度从2010年到2024年。
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">用户评分分析</div>
+                    <div class="insight-content">
+                        平均用户评分为<span class="metric">7.2</span>分，其中爵士乐和流行音乐获得较高评分，
+                        表明用户对这些风格的音乐质量较为认可。
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">播放量表现</div>
+                    <div class="insight-content">
+                        平均播放量为<span class="metric">13.9M</span>，流行音乐的播放量普遍较高，
+                        这与市场主流趋势相符。
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-card">
+                <div class="analysis-title">🎵 音乐风格分析</div>
+                <div class="insight-item">
+                    <div class="insight-title">风格分布均衡</div>
+                    <div class="insight-content">
+                        各音乐风格分布相对均衡，其中<span class="metric">流行</span>占15.5%，
+                        <span class="metric">爵士</span>占15.0%，<span class="metric">电子</span>占13.5%。
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">风格特征差异</div>
+                    <div class="insight-content">
+                        电子音乐具有较高的<span class="metric">能量值</span>和<span class="metric">舞蹈性</span>，
+                        而古典音乐则表现出较高的<span class="metric">原声性</span>。
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">市场接受度</div>
+                    <div class="insight-content">
+                        流行音乐和R&B在播放量上表现突出，反映了当前市场的主流偏好。
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-card">
+                <div class="analysis-title">👨‍🎤 艺术家表现</div>
+                <div class="insight-item">
+                    <div class="insight-title">艺术家多样性</div>
+                    <div class="insight-content">
+                        数据集涵盖了从经典艺术家如<span class="metric">张学友</span>、<span class="metric">周杰伦</span>
+                        到新生代艺人如<span class="metric">邓紫棋</span>、<span class="metric">Taylor Swift</span>。
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">作品数量分布</div>
+                    <div class="insight-content">
+                        艺术家作品数量呈现长尾分布，少数艺术家贡献了大部分歌曲，
+                        这符合音乐产业的典型特征。
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">跨风格能力</div>
+                    <div class="insight-content">
+                        部分艺术家如周杰伦、林俊杰等能够驾驭多种音乐风格，
+                        展现了较强的音乐适应性和创作能力。
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-card">
+                <div class="analysis-title">📈 时间趋势分析</div>
+                <div class="insight-item">
+                    <div class="insight-title">年份分布特征</div>
+                    <div class="insight-content">
+                        歌曲主要集中在2015-2023年期间，反映了近十年音乐市场的发展状况。
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">播放量趋势</div>
+                    <div class="insight-content">
+                        近年来发行的歌曲播放量呈上升趋势，可能与流媒体平台的发展
+                        和用户听歌习惯的改变有关。
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">风格演变</div>
+                    <div class="insight-content">
+                        电子音乐和说唱在近年来的占比有所增加，反映了音乐风格的
+                        现代化和多元化发展趋势。
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-card chart-full-width">
+                <div class="analysis-title">🔍 数据质量评估</div>
+                <div class="insight-item">
+                    <div class="insight-title">数据完整性</div>
+                    <div class="insight-content">
+                        数据集包含完整的歌曲信息，包括歌曲名称、艺术家、专辑、风格、
+                        发行年份、播放量、评分等关键字段，数据质量良好。
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">特征工程</div>
+                    <div class="insight-content">
+                        通过音乐特征工程，提取了舞蹈性、能量、情绪积极性、原声性等
+                        维度，为深入分析提供了丰富的数据基础。
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">统计显著性</div>
+                    <div class="insight-content">
+                        样本量充足（200首歌曲），各音乐风格和艺术家分布合理，
+                        统计分析结果具有较高的可信度和代表性。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 图表展示 -->
+        <div class="chart-grid">
+            <div class="chart-container chart-full-width">
+                <div class="chart-title">音乐特征相关性分析</div>
+                <img src="{{ url_for('static', filename='charts/genre_heatmap.png') }}" alt="音乐特征热力图" class="chart-image">
+                <div class="chart-description">
+                    <p><strong>图表解读：</strong>该热力图展示了不同音乐风格在各个音频特征维度上的表现差异。</p>
+                    <p><strong>关键发现：</strong></p>
+                    <ul>
+                        <li><strong>电子音乐</strong>：高舞蹈性和能量，低原声性，符合电子音乐特征</li>
+                        <li><strong>古典音乐</strong>：高原声性，低舞蹈性，体现了古典音乐的特性</li>
+                        <li><strong>流行音乐</strong>：各特征相对均衡，体现了流行音乐的包容性</li>
+                        <li><strong>民谣</strong>：较高的原声性和适中的情绪积极性</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">评分与播放量关系</div>
+                <img src="{{ url_for('static', filename='charts/rating_vs_plays.png') }}" alt="评分与播放量关系图" class="chart-image">
+                <div class="chart-description">
+                    <p><strong>图表解读：</strong>散点图展示了用户评分与播放量之间的关系，颜色深浅代表能量值。</p>
+                    <p><strong>关键发现：</strong></p>
+                    <ul>
+                        <li>高评分歌曲通常有较高的播放量</li>
+                        <li>能量值较高的歌曲在播放量上表现更好</li>
+                        <li>存在少数高评分但播放量较低的精品歌曲</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">歌曲时长分布</div>
+                <img src="{{ url_for('static', filename='charts/duration_distribution.png') }}" alt="歌曲时长分布图" class="chart-image">
+                <div class="chart-description">
+                    <p><strong>图表解读：</strong>直方图显示了歌曲时长的分布情况，红色虚线为平均时长。</p>
+                    <p><strong>关键发现：</strong></p>
+                    <ul>
+                        <li>大部分歌曲时长集中在3-4分钟</li>
+                        <li>符合现代流行音乐的典型长度</li>
+                        <li>平均时长约为4.2分钟</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 结论与建议 -->
+        <div class="analysis-card chart-full-width">
+            <div class="analysis-title">💡 结论与建议</div>
+            <div class="insight-item">
+                <div class="insight-title">主要结论</div>
+                <div class="insight-content">
+                    1. <strong>音乐风格多元化</strong>：数据集涵盖了8种主要音乐风格，体现了音乐市场的多样性<br>
+                    2. <strong>用户偏好多样</strong>：不同风格音乐都有相应的受众群体，评分分布相对均匀<br>
+                    3. <strong>艺术家表现差异</strong>：知名艺术家在播放量和评分上都有较好表现<br>
+                    4. <strong>时间趋势明显</strong>：近年来音乐风格更加多元化，电子元素增加
+                </div>
+            </div>
+            <div class="insight-item">
+                <div class="insight-title">应用建议</div>
+                <div class="insight-content">
+                    1. <strong>推荐系统优化</strong>：基于音乐特征和用户偏好构建个性化推荐<br>
+                    2. <strong>内容策划</strong>：根据风格特征和用户反馈优化歌单内容<br>
+                    3. <strong>市场分析</strong>：利用时间趋势数据预测音乐流行方向<br>
+                    4. <strong>用户体验</strong>：结合评分和播放量数据优化歌曲排序
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>© 2024 QQ音乐数据分析项目 | 基于Python Flask开发</p>
+        </footer>
+    </div>
+</body>
+</html>

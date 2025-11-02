@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于项目 - QQ音乐歌单数据分析</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .about-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .about-section {
+            margin-bottom: 40px;
+        }
+        
+        .about-section h3 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .about-section p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .tech-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .tech-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .tech-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .tech-item p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e1e5e9;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .project-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .project-timeline:before {
+            content: "";
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #667eea;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -37px;
+            top: 25px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #667eea;
+        }
+        
+        .timeline-date {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-content h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .timeline-content p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .download-section {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>🎵 QQ音乐数据分析</h1>
+            </div>
+            <div class="nav-links">
+                <a href="/">首页</a>
+                <a href="/analysis">分析</a>
+                <a href="/about" class="active">关于</a>
+            </div>
+        </nav>
+
+        <!-- 页面标题 -->
+        <div class="header">
+            <h2>关于项目</h2>
+            <p>了解QQ音乐歌单数据分析项目的技术细节和实现过程</p>
+        </div>
+
+        <!-- 项目介绍 -->
+        <div class="about-content">
+            <div class="about-section">
+                <h3>📋 项目概述</h3>
+                <p>
+                    QQ音乐歌单数据分析项目是一个基于Python的数据可视化Web应用，旨在通过分析音乐数据，
+                    揭示音乐风格、艺术家表现、用户偏好等多维度的洞察。该项目适合Python初学者和数据科学爱好者，
+                    展示了从数据收集、处理到可视化展示的完整流程。
+                </p>
+                <p>
+                    项目采用真实的数据分析方法，结合现代Web技术，创建了一个交互式的数据探索平台。
+                    用户可以筛选、排序和分析音乐数据，获得个性化的数据洞察。
+                </p>
+            </div>
+
+            <div class="about-section">
+                <h3>🛠️ 技术栈</h3>
+                <div class="tech-list">
+                    <div class="tech-item">
+                        <h4>Python</h4>
+                        <p>主要编程语言，用于数据处理和后端开发</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Pandas</h4>
+                        <p>数据分析和处理库，用于数据清洗和统计分析</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>NumPy</h4>
+                        <p>数值计算库，提供高效的数组操作</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Matplotlib</h4>
+                        <p>基础数据可视化库，创建静态图表</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Seaborn</h4>
+                        <p>高级数据可视化库，美化统计图表</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Flask</h4>
+                        <p>轻量级Web框架，构建动态Web应用</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>HTML/CSS</h4>
+                        <p>前端技术，构建用户界面和样式</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>JavaScript</h4>
+                        <p>前端交互脚本，实现动态功能</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h3>✨ 主要功能</h3>
+                <ul class="feature-list">
+                    <li>数据可视化：多种图表类型展示音乐数据分布</li>
+                    <li>交互式筛选：支持按风格、艺术家、评分等条件筛选</li>
+                    <li>实时统计：动态显示数据统计和分析结果</li>
+                    <li>响应式设计：适配不同设备和屏幕尺寸</li>
+                    <li>数据导出：支持CSV格式数据下载</li>
+                    <li>深度分析：提供专业的数据洞察和趋势分析</li>
+                    <li>用户友好：直观的操作界面和清晰的数据展示</li>
+                    <li>扩展性强：模块化的代码结构，易于功能扩展</li>
+                </ul>
+            </div>
+
+            <div class="about-section">
+                <h3>📊 数据结构</h3>
+                <p>
+                    项目使用的数据集包含以下关键字段：
+                </p>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>基本信息</strong>：歌曲ID、歌曲名称、艺术家、专辑、音乐风格、发行年份</li>
+                    <li><strong>播放数据</strong>：播放量、用户评分</li>
+                    <li><strong>音频特征</strong>：舞蹈性、能量、情绪积极性、原声性</li>
+                    <li><strong>衍生指标</strong>：歌曲时长（分钟）、播放量（百万）</li>
+                </ul>
+                <p>
+                    数据集包含200首歌曲，涵盖8种音乐风格，由28位艺术家演唱，
+                    时间跨度从2010年到2024年，为全面分析提供了充足的数据基础。
+                </p>
+            </div>
+
+            <div class="download-section">
+                <h3>📥 资源下载</h3>
+                <p>获取项目相关资源，开始你的数据分析之旅</p>
+                <a href="qq_music_data.csv" class="download-btn" download>📊 下载数据集 (CSV)</a>
+                <a href="data_generator_fixed.py" class="download-btn" download>🐍 下载数据生成脚本文件</a>
+                <a href="basic_visualization.py" class="download-btn" download>📈 下载可视化脚本文件</a>
+            </div>
+
+            <div class="about-section">
+                <h3>📞 联系与支持</h3>
+                <p>
+                    如果你在项目开发过程中遇到问题，可以通过以下方式获得帮助：
+                </p>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>官方文档</strong>：查阅Python、Pandas、Flask等库的官方文档</li>
+                    <li><strong>技术社区</strong>：在Stack Overflow、CSDN等平台搜索相关问题</li>
+                    <li><strong>学习资源</strong>：参考B站、YouTube上的Python数据分析教程</li>
+                    <li><strong>实践练习</strong>：多动手实践，从简单例子开始逐步增加复杂度</li>
+                </ul>
+                <p>
+                    记住，编程学习是一个循序渐进的过程，遇到困难是正常的。
+                    保持耐心，持续练习，你一定能够掌握这些技能！
+                </p>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>© 2025 QQ音乐数据分析项目 | 基于Python Flask开发 | 适合初学者学习使用</p>
+        </footer>
+    </div>
+</body>
+</html>
