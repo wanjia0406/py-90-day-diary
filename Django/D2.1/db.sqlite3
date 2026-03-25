@@ -1,0 +1,16 @@
+在 Django 中，启动开发服务器的代码（命令）非常固定，只需要在项目根目录（能看到manage.py的目录）的终端里执行以下命令即可：
+核心启动命令
+bash
+运行
+python manage.py runserver
+
+
+# 在项目根目录（manage.py所在目录）执行
+python manage.py makemigrations
+作用：检测你对 ORM 模型的修改（新增 / 修改字段、模型），生成对应的迁移脚本（存放在各 app 的migrations文件夹下）。
+
+python manage.py migrate
+作用：将迁移脚本中的操作同步到数据库，自动创建表、字段，建立外键关联等。
+
+python manage.py makemigrations  # 生成迁移脚本（相当于把Model转成SQL草稿）
+python manage.py migrate         # 执行脚本（把SQL真正跑在MySQL里）

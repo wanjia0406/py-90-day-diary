@@ -1,0 +1,46 @@
+{%extends 'login_css.html'%}
+
+{% block content %}
+<!-- 登录卡片容器 - 保留你原有样式 -->
+<div class="login-card" style="padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; max-width: 450px; margin: 50px auto;">
+    <!-- 标题区域 -->
+    <h2 class="login-title" style="text-align: center; margin-bottom: 25px; color: #333; font-weight: 600;">重置密码</h2>
+    
+    <!-- 用户名提示 - 美化样式 -->
+    {% if title %}
+    <div style="text-align: center; margin-bottom: 20px; color: #666; font-size: 14px;">
+        正在为 <span style="color: #007bff; font-weight: 500;">{{ title|cut:"重置 "|cut:" 的密码" }}</span> 设置新密码
+    </div>
+    {% endif %}
+
+    <!-- 全局错误提示 -->
+    {% if error_msg %}
+    <div style="padding: 10px; background-color: #f8d7da; color: #721c24; border-radius: 4px; margin-bottom: 20px; text-align: center;">
+        {{ error_msg }}
+    </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- 表单字段 - 保留你原有样式 -->
+        {% for field in form %}
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; color: #555; font-weight: 500;">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+            <span style="color: #dc3545; font-size: 12px; margin-top: 5px; display: block;">{{ field.errors.0 }}</span>
+            {% endif %}
+        </div>
+        {% endfor %}
+        
+        <!-- 按钮区域 - 按要求调整：确认重置按钮放大，返回登录等宽平分 -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; gap: 10px;">
+            <!-- 确认重置按钮：放大（内边距/字号加大） -->
+            <button type="submit" class="btn btn-primary" style="padding: 12px 30px; font-size: 16px; flex: 1;">确认重置</button>
+            <!-- 返回登录按钮：和确认重置等宽（flex:1），实现2*2平分结构 -->
+            <a href="/login/" class="btn btn-default" style="padding: 12px 30px; font-size: 16px; flex: 1; text-align: center;">返回登录</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

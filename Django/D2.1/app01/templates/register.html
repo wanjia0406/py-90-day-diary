@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查询网站 - 注册</title>
+    <!-- Bootstrap CSS -->
+    <link rel='stylesheet' href="{% static 'plugins/bootstrap-5.3.8/css/bootstrap.min.css' %}">
+    <!-- 自定义样式 -->
+    <style>
+        /* 全局样式 */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        /* 登录卡片样式 */
+        .login-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 450px;
+            transition: all 0.3s ease;
+        }
+
+        .login-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 标题样式 */
+        .login-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .login-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* 表单控件样式 */
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #e1e5e9;
+            padding: 0.75rem 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        /* 复选框样式 */
+        .form-check-input:checked {
+            background-color: #667eea;
+            border-color: #667eea;
+        }
+
+        /* 提交按钮样式 */
+        .btn-primary {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* 底部文本样式 */
+        .login-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .login-footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* 错误提示样式 */
+        .error-message {
+            color: #dc3545;
+            /* Bootstrap危险色，和主题协调 */
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: block;
+            /* 确保独占一行 */
+        }
+
+        /* 新增：表单组间距，适配字段循环 */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+    {% block css %} {% endblock %}
+</head>
+
+<body>
+    <!-- 登录卡片容器 -->
+    <div class="login-card">
+        <!-- 移除无用的form-title，保留美化标题 -->
+        <h2 class="login-title">欢迎注册网站</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- 核心修复1：补全for循环的开头（你之前只写了endfor，缺少开头） -->
+            {% for field in form %}
+            <div class="form-group">
+                <label class="form-label">{{ field.label }}</label>
+                <!-- 密码框自动显示为密码类型，用户名是文本类型 -->
+                {{ field }}
+                {% if field.errors %}
+                <span class="error-msg">{{ field.errors.0 }}</span>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">注册</button>
+
+            <!-- 新增：底部登录跳转链接，保持样式统一 -->
+            <div class="login-footer">
+                已有账号？<a href="/login/">立即登录</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="{% static 'plugins/bootstrap-5.3.8/js/bootstrap.bundle.min.js' %}"></script>
+    {% block js %} {% endblock %}
+</body>
+
+</html>

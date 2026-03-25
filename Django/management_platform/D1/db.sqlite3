@@ -1,0 +1,5 @@
+在 Django 中，启动开发服务器的代码（命令）非常固定，只需要在项目根目录（能看到manage.py的目录）的终端里执行以下命令即可：
+核心启动命令
+bash
+运行
+python manage.py runserver

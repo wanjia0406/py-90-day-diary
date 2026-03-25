@@ -1,0 +1,51 @@
+{%extends 'login_css.html'%}
+
+{% block content %}
+
+<!-- 登录卡片容器 -->
+<div class="login-card">
+    <h2 class="login-title">欢迎登录查询网站</h2>
+
+    <form method="post">
+        {%csrf_token %}
+
+        <div class="mb-4">
+            <label for="usernameInput" class="form-label">用户名</label>
+            <input type="text" class="form-control" id="usernameInput" name="username" required placeholder="请输入您的用户名">
+            <span class="error-message">{{form.username.errors.0}}</span>
+        </div>
+
+        <div class="mb-4">
+            <label for="exampleInputPassword1" class="form-label">密码</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password" required
+                placeholder="请输入您的密码">
+            <span class="error-message">{{form.password.errors.0}}</span>
+        </div>
+
+        <!-- 新增：验证码输入框 + 验证码图片 -->
+        <!-- <div class="mb-4">
+                <label class="form-label">验证码</label>
+                <div class="captcha-group">
+                    <input type="text" class="form-control" name="captcha" required placeholder="请输入验证码" style="flex: 1;">
+                    验证码图片：点击可刷新
+                    <img src="/captcha/" alt="验证码" class="captcha-img" id="captchaImg">
+                </div>
+                <span class="error-message">{{form.captcha.errors.0}}</span>
+            </div> -->
+
+        <div class="mb-4 form-check d-flex justify-content-between align-items-center">
+            <div>
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">记住我</label>
+            </div>
+            <a href="/login/reset/request/" class="text-decoration-none text-primary">忘记密码？</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary">登录</button>
+
+        <div class="login-footer">
+            还没有账号？<a href="/register/">立即注册</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

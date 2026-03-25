@@ -1,0 +1,21 @@
+
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container" style="padding: 2rem 0;">
+        <div
+            style="margin-bottom: 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <h4 style="margin: 0; color: #2589d1; font-weight: 600;">修改部门</h4>
+            
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">部门</label>
+                <input type="text" class="form-control" id="text" name="title" value="{{row_object.title}}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">修改</button>
+        </form>
+
+    </div>
+{% endblock %}

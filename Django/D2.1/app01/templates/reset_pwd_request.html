@@ -1,0 +1,24 @@
+{%extends 'login_css.html'%}
+
+{% block content %}
+
+
+<!-- 登录卡片容器 -->
+<div class="login-card">
+    <h2 class="login-title">忘记密码</h2>
+
+    <form method="post">
+        {%csrf_token %}
+
+        {% for field in form %}
+        <div class="form-group">
+            <label>{{ field.label }}</label>
+            {{ field }}
+            <span style="color: red;">{{ field.errors.0 }}</span>
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary" style="margin-top: 30px;">下一步</button>
+        <a href="/login/" class="btn btn-default" style="margin-right: auto">返回登录</a>
+    </form>
+</div>
+{% endblock %}

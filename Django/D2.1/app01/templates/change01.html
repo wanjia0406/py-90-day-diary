@@ -1,0 +1,134 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<style>
+    /* 全局重置默认样式，保证兼容性 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Microsoft YaHei", sans-serif;
+    }
+
+    body {
+        background-color: #f8f9fa; /* 浅灰背景，区分表单区域 */
+    }
+
+    /* 表单容器：加阴影、圆角、白背景，更有层次感 */
+    .form-container {
+        max-width: 500px; /* 适度收窄，更聚焦 */
+        margin: 3rem auto;
+        padding: 2rem;
+        background-color: #ffffff;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); /* 柔和阴影 */
+    }
+
+    /* 标题样式：加粗+浅蓝颜色+底部线条 */
+    .form-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 1.8rem;
+        padding-bottom: 0.8rem;
+        border-bottom: 2px solid #0d6efd; /* 蓝色底线，更醒目 */
+        letter-spacing: 0.5px; /* 字间距，更舒展 */
+    }
+
+    /* 表单组：增加间距，避免拥挤 */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    /* 标签样式：浅灰+稍大字号 */
+    .form-label {
+        font-weight: 600;
+        color: #495057;
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    /* 输入框样式：优化边框、圆角、内边距，加聚焦效果 */
+    .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ced4da;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* 过渡动画 */
+    }
+
+    /* 输入框聚焦：蓝色边框+轻微发光 */
+    .form-control:focus {
+        outline: none;
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+    }
+
+    /* 密码框等特殊输入框统一样式 */
+    .form-control[type="password"] {
+        letter-spacing: 1px; /* 密码框字间距，更易读 */
+    }
+
+    /* 错误提示：红色+小图标（可选）+ 上间距 */
+    .error-msg {
+        color: #dc3545;
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-top: 0.3rem;
+        display: block; /* 独占一行 */
+    }
+
+    /* 提交按钮：渐变+hover效果+圆角 */
+    .submit-btn {
+        width: 100%; /* 按钮铺满宽度，更大气 */
+        background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+        color: white;
+        border: none;
+        padding: 0.8rem 1rem;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 0.5rem;
+    }
+
+    /* 按钮hover：加深颜色+轻微缩放 */
+    .submit-btn:hover {
+        background: linear-gradient(135deg, #0b5ed7 0%, #084298 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+    }
+
+    /* 按钮点击：恢复位置 */
+    .submit-btn:active {
+        transform: translateY(0);
+    }
+</style>
+
+<div class="form-container">
+    <!-- 标题 -->
+    <div class="form-title">{{ title }}</div>
+
+    <!-- 表单：纵向单列布局 -->
+    <form method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="form-group"> <!-- 修正你之前的calass拼写错误 -->
+            <label class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+                <span class="error-msg">⚠️ {{ field.errors.0 }}</span> <!-- 加小图标，更醒目 -->
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <!-- 提交按钮 -->
+        <button type="submit" class="submit-btn">提交</button>
+    </form>
+</div>
+{% endblock %}

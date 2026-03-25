@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="panel panel-default">
+
+    <div
+        style="margin-bottom: 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <h4 style="margin: 0; color: #2589d1; font-weight: 600;">管理员列表</h4>
+
+        <!-- 搜索框 -->
+        <nav>
+            <div class="container-fluid">
+                <form class="d-flex" role="search" method="get">
+                    <input class="form-control me-2" type="search" placeholder="搜索" aria-label="Search" name='q' />
+                    <button class="btn btn-outline-success" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </nav>
+
+        <!-- 外层容器：控制按钮组靠右，并且添加间距 -->
+        <div style="text-align: right; margin: 10px 0;">
+            <!-- 按钮组：让按钮并排且有适当间距 -->
+            <div style="display: inline-flex; gap: 50px;">
+                <a class="btn btn-primary" href="/admin01/add/" style="padding: 8px 16px; border-radius: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5z" />
+                        <path
+                            d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1z" />
+                    </svg>
+                    新建管理员
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-secondary">
+                <th scope="col">ID</th>
+                <th scope="col">姓名</th>
+                <th scope="col">密码</th>
+                <th scope="col">重置密码</th>
+                <th scope="col">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in queryset %}
+            <tr>
+                <th scope="row">{{obj.id}}</th>
+                <td>{{obj.username}}</td>
+                <td>{{obj.password}}</td>
+                <!-- <td>******</td> -->
+                <td><a href="/admin01/{{obj.id}}/reset/">重置密码</a></td>
+
+                <td>
+                    <a class="btn btn-primary" href="/admin01/{{obj.id}}/edit/">编辑</a>
+                    <a class="btn btn-danger" href="/admin01/{{obj.id}}/delete/">删除</a>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+
+{% endblock %}
