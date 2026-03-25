@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container" style="padding: 1rem 0;">
+        <div
+            style="margin-bottom: 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <h4 style="margin: 0; color: #2589d1; font-weight: 600;">部门列表</h4>
+            <a class="btn btn-primary" href="/depart/add/" style="padding: 8px 16px; border-radius: 6px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5z" />
+                    <path
+                        d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1z" />
+                </svg>
+                新建部门
+            </a>
+        </div>
+
+        <div class="panel panel-default">
+
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-secondary">
+                        <th scope="col">#</th>
+                        <th scope="col">名称</th>
+                        <th scope="col">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for obj in queryset %}
+                    <tr>
+                        <th scope="row">{{obj.id}}</th>
+                        <td>{{obj.title}}</td>
+                        <td>
+                            <a class="btn btn-primary" href="/depart/{{obj.id}}/edit/">编辑</a>
+
+                            <form method="post" action="/depart/delete/" style="display: inline;">
+                                {% csrf_token %} <!-- 必须加，防403错误 -->
+                                <input type="hidden" name="nid" value="{{obj.id}}">
+                                <!-- 按钮样式和原来保持一致，加确认框防误删 -->
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('确定要删除【{{obj.title}}】部门吗？')">删除</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+{% endblock %}

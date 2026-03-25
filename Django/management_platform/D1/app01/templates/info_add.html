@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加用户</title>
+    <!-- 匹配路径：static/plugins/bootstrap-3.4.1/css -->
+    <link href="/static/plugins/bootstrap-3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container { margin-top: 50px; }
+        .form-group { margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center text-primary">添加用户</h1>
+        
+        <form method="post" action="/info/add/" class="form-horizontal" style="max-width: 500px; margin: 0 auto;">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="user" placeholder="用户名" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" name="pwd" placeholder="密码" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" name="age" placeholder="年龄" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="提交" class="btn btn-success btn-block">
+            </div>
+        </form>
+
+        <button id="test-btn" class="btn btn-warning btn-block" style="max-width: 500px; margin: 20px auto; display: block;">
+            点击验证 jQuery/Bootstrap 是否导入成功
+        </button>
+    </div>
+
+    <!-- 匹配路径：static/js -->
+    <script src="/static/js/jquery-3.7.1.min.js"></script>
+    <!-- 匹配路径：static/plugins/bootstrap-3.4.1/js -->
+    <script src="/static/plugins/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // 验证1：jQuery是否加载
+            if (typeof $ === 'undefined') {
+                alert("❌ jQuery未找到，请检查：/static/js/jquery-3.7.1.min.js 是否存在");
+                return;
+            }
+            console.log("✅ jQuery 导入成功");
+
+            // 验证2：Bootstrap JS是否加载
+            if (typeof $.fn.modal === 'undefined') {
+                alert("❌ Bootstrap JS未找到，请检查：/static/plugins/bootstrap-3.4.1/js/bootstrap.min.js 是否存在");
+                return;
+            }
+            console.log("✅ Bootstrap JS 导入成功");
+
+            // 验证3：交互效果
+            $("#test-btn").click(function() {
+                alert("🎉 所有静态文件导入成功！\n- 输入框样式（Bootstrap CSS）\n- 点击交互（jQuery）");
+                $("h1").css("color", "#dc3545");
+            });
+        });
+    </script>
+</body>
+</html>

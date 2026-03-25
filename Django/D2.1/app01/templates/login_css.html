@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查询网站 - 登录</title>
+    <!-- Bootstrap CSS -->
+    <link rel='stylesheet' href="{% static 'plugins/bootstrap-5.3.8/css/bootstrap.min.css' %}">
+    <!-- 自定义样式 -->
+    <style>
+        /* 全局样式 */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        /* 登录卡片样式 */
+        .login-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 450px;
+            transition: all 0.3s ease;
+        }
+
+        .login-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 标题样式 */
+        .login-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .login-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* 表单控件样式 */
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #e1e5e9;
+            padding: 0.75rem 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        /* 复选框样式 */
+        .form-check-input:checked {
+            background-color: #667eea;
+            border-color: #667eea;
+        }
+
+        /* 提交按钮样式 */
+        .btn-primary {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* 底部文本样式 */
+        .login-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .login-footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* 错误提示样式 */
+        .error-message {
+            color: #dc3545;
+            /* Bootstrap危险色，和主题协调 */
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: block;
+            /* 确保独占一行 */
+        }
+
+        /* 验证码样式 */
+        .captcha-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .captcha-img {
+            width: 120px;
+            height: 48px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .captcha-img:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+    </style>
+    {% block css %} {% endblock %}
+</head>
+
+<body>
+
+
+
+    {% block content %}{% endblock %}
+
+    <script src="{% static 'plugins/bootstrap-5.3.8/js/bootstrap.bundle.min.js' %}"></script>
+    {% block js %} {% endblock %}
+</body>
+
+</html>

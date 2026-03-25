@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>love</title>
+</head>
+<body>
+    <h1>用户列表</h1>
+
+    <a href="/info/add/">添加</a>
+
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>密码</th>
+                <th>年龄</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 循环开始：第20行左右的for标签 -->
+            {% for obj in data_list %}  
+                <tr>
+                    <td>{{ obj.id }}</td>
+                    <td>{{ obj.name }}</td>
+                    <td>{{ obj.password }}</td> 
+                    <td>{{ obj.age }}</td>
+                    <td>
+                        <a href="/info/delete/?nid={{obj.id}}">删除</a>
+                    </td>
+                </tr>
+            {% empty %}  <!-- 可选：无数据时显示提示，避免表格空行 -->
+                <tr>
+                    <td colspan="4" align="center">暂无用户数据</td>
+                </tr>
+            {% endfor %}  <!-- 关键：必须加这行闭合for循环 -->
+        </tbody>
+    </table>
+</body>
+</html>

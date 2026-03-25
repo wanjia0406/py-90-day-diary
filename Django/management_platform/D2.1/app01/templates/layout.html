@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查询网站</title>
+    <link rel='stylesheet' href="{% static 'plugins/bootstrap-5.3.8/css/bootstrap.min.css' %}">
+    {% block css %} {% endblock %}
+    <style>
+        /* 自定义导航栏样式，匹配登录页配色 */
+        .navbar-custom {
+            /* 替换为登录页的主渐变背景 */
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%) !important;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+        }
+
+        .navbar-custom .nav-link,
+        .navbar-custom .navbar-brand {
+            color: white !important;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-custom .nav-link:hover {
+            /* 悬停色调整为浅白色，更柔和 */
+            color: #f0f0f0 !important;
+        }
+
+        .navbar-custom .dropdown-menu {
+            /* 下拉菜单激活项匹配主色调 */
+            --bs-dropdown-link-active-bg: #667eea;
+            --bs-dropdown-link-active-color: white;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 用户名样式，适配新的导航栏配色 */
+        .user-name {
+            margin-right: 15px;
+            color: white !important;
+            align-self: center;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+        
+        /* 用户名悬停效果 */
+        .user-name:hover {
+            color: #f0f0f0 !important;
+        }
+
+        /* 响应式适配：小屏幕下自动换行 */
+        @media (max-width: 991px) {
+            .user-name {
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://getbootstrap.com/docs/" target="_blank">查询网站</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="切换导航">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- 左侧导航菜单 -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/login/">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/list/">管理员</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/depart/list/">部门管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/list/">用户管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pretty/list/">靓号管理</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            菜单
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://icons.getbootstrap.com/" target="_blank">图标网站</a></li>
+                            <li><a class="dropdown-item" href="#">2</a></li>
+                            <li><a class="dropdown-item" href="#">3</a></li>
+                            <li><a class="dropdown-item" href="#">4</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">更多选项</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">已失效</a>
+                    </li>
+                </ul>
+
+                <!-- 右侧用户区域：用户名 + 用户菜单 -->
+                <div class="d-flex align-items-center">
+                    <a class="user-name" href="http://127.0.0.1:8000/depart/list/"
+                        style="text-decoration: none !important;">{{request.session.info.name}}</a>
+                    <!-- 原有：用户菜单 -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-expanded="false">用户菜单</a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">个人中心</a></li>
+                                <li><a class="dropdown-item" href="#">设置</a></li>
+                                <li><a class="dropdown-item" href="#">帮助</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/logout/">退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <script src="{% static 'plugins/bootstrap-5.3.8/js/bootstrap.bundle.min.js' %}"></script>
+    {% block js %} {% endblock %}
+</body>
+
+</html>
