@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container" style="padding: 2rem 0;">
+    <div
+        style="margin-bottom: 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <h4 style="margin: 0; color: #2589d1; font-weight: 600;">新建用户</h4>
+    </div>
+    
+    <!-- 修改：给表单添加id -->
+    <form class="row g-3" method="post" id="userForm">
+        {% csrf_token %}
+        <div class="col-md-6">
+            <label class="form-label">用户名</label>
+            <input type="text" class="form-control" placeholder="用户名" name="user" id="userInput">
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">密码</label>
+            <input type="password" class="form-control" placeholder="密码" name="pwd" id="pwdInput">
+        </div>
+        <div class="col-12">
+            <label class="form-label">年龄</label>
+            <input type="text" class="form-control" placeholder="年龄" name="age" id="ageInput">
+        </div>
+        <div class="col-12">
+            <label class="form-label">工资</label>
+            <input type="text" class="form-control" placeholder="工资" name="salary" id="salaryInput">
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">入职时间</label>
+            <input type="text" class="form-control" placeholder="入职时间" name="time" id="timeInput">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">性别</label>
+            <select class="form-select" name="gender">
+                {% for item in gender_choices %}
+                <option value="{{item.0}}">{{item.1}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">所属部门</label>
+            <select class="form-select" name="depart">
+                {% for item in depart_list %}
+                <option value="{{item.id}}">{{item.title}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-12">
+            <!-- 修改：按钮类型改为button，添加onclick事件 -->
+            <button type="button" class="btn btn-primary" onclick="checkForm()">注册</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function checkForm() {
+        // 获取所有输入框
+        var user = document.getElementById('userInput').value.trim();
+        var pwd = document.getElementById('pwdInput').value.trim();
+        var age = document.getElementById('ageInput').value.trim();
+        var salary = document.getElementById('salaryInput').value.trim();
+        var time = document.getElementById('timeInput').value.trim();
+        
+        // 验证用户名
+        if (!user) {
+            alert("用户名不能为空！");
+            document.getElementById('userInput').focus();
+            return false;
+        }
+        
+        // 验证密码
+        if (!pwd) {
+            alert("密码不能为空！");
+            document.getElementById('pwdInput').focus();
+            return false;
+        }
+        
+        // 验证年龄
+        if (!age) {
+            alert("年龄不能为空！");
+            document.getElementById('ageInput').focus();
+            return false;
+        }
+        
+        // 验证工资
+        if (!salary) {
+            alert("工资不能为空！");
+            document.getElementById('salaryInput').focus();
+            return false;
+        }
+        
+        // 验证入职时间
+        if (!time) {
+            alert("入职时间不能为空！");
+            document.getElementById('timeInput').focus();
+            return false;
+        }
+        
+        // 如果所有验证通过，提交表单
+        document.getElementById('userForm').submit();
+    }
+</script>
+{% endblock %}

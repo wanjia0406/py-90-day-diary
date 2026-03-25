@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container" style="padding: 1rem 0;">
+    <div
+        style="margin-bottom: 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <h4 style="margin: 0; color: #2589d1; font-weight: 600;">用户列表</h4>
+        <!-- 外层容器：控制按钮组靠右，并且添加间距 -->
+        <div style="text-align: right; margin: 10px 0;">
+            <!-- 按钮组：让按钮并排且有适当间距 -->
+            <div style="display: inline-flex; gap: 50px;">
+                <a class="btn btn-primary" href="/user/add/" style="padding: 8px 16px; border-radius: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5z" />
+                        <path
+                            d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1z" />
+                    </svg>
+                    新建用户
+                </a>
+                <a class="btn btn-primary" href="/user/model/form/add/" style="padding: 8px 16px; border-radius: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5z" />
+                        <path
+                            d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1z" />
+                    </svg>
+                    新建用户ModelForm
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-secondary">
+                    <th scope="col">ID</th>
+                    <th scope="col">姓名</th>
+                    <th scope="col">密码</th>
+                    <th scope="col">年龄</th>
+                    <th scope="col">工资</th>
+                    <th scope="col">入职时间</th>
+                    <th scope="col">性别</th>
+                    <th scope="col">所属部门</th>
+                    <th scope="col">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in queryset %}
+                <tr>
+                    <th scope="row">{{obj.id}}</th>
+                    <td>{{obj.name}}</td>
+                    <td>{{obj.password}}</td>
+                    <td>{{obj.age}}</td>
+                    <td>{{obj.account}}</td>
+                    <td>{{obj.create_time|date:"Y-m-d"}}</td>
+                    <td>{{obj.get_gender_display}}</td>
+                    <td>{{obj.depart.title}}</td>
+                    <td>
+                        <a class="btn btn-primary" href="/user/{{obj.id}}/edit/">编辑</a>
+                        <a class="btn btn-danger" href="/user/{{obj.id}}/delete/">删除</a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+{% endblock %}
